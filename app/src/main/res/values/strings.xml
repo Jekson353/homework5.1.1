@@ -1,0 +1,59 @@
+<resources>
+    <string name="app_name">Записная книжка</string>
+    <string name="save">Сохранить</string>
+    <string name="save_ok">данные сохранены</string>
+    <string name="shared_pref_name">MyNote</string>
+    <string name="_7">7</string>
+    <string name="_8">8</string>
+    <string name="_9">9</string>
+    <string name="_4">4</string>
+    <string name="_5">5</string>
+    <string name="_6">6</string>
+    <string name="_1">1</string>
+    <string name="_2">2</string>
+    <string name="_3">3</string>
+    <string name="_0">0</string>
+    <string name="point">.</string>
+    <string name="minus">—</string>
+    <string name="pluse">+</string>
+    <string name="clear">C</string>
+    <string name="delete">÷</string>
+    <string name="res">=</string>
+    <string name="percent">%</string>
+    <string name="plmin">+/-</string>
+    <string name="multiply">X</string>
+    <string name="many_symbols">many symbols</string>
+    <string name="input_money">Ввод денег</string>
+    <string name="input_info">Информация об оплате</string>
+    <string name="ok">OK</string>
+    <string name="with_bank_card">С банковской карты</string>
+    <string name="with_mobile_phone">С мобильного телефона</string>
+    <string name="with_address_cash">Наличными по адресу</string>
+    <string name="no_input_value">Не указана сумма или информация об оплате</string>
+    <string name="no_type_pay">Тип оплаты не выбран</string>
+    <string name="result_pay">Сумма: %d Назначение платежа: %s Вид: %s</string>
+    <string name="text_old">Тут будут записки…</string>
+    <string name="menu_main">Главная</string>
+    <string name="menu_pay">Оплата</string>
+    <string name="menu_notes">Записная книжка</string>
+    <string name="menu_calc">Калькулятор</string>
+    <string name="tittle_notes">Записки</string>
+    <string name="tittle_calc">Калькулятор</string>
+    <string name="tittle_pay">Оплата</string>
+    <string name="tittle_main">Главное меню</string>
+    <string name="toast_notes">Открывается записная книжка</string>
+    <string name="toast_main">Открывается Главное окно</string>
+    <string name="toast_calc">Открывается калькулятор</string>
+    <string name="toast_pay">Открываются оплаты</string>
+    <string name="toast_adapter">Открывается адаптер</string>
+    <string name="enter_text">Введите текст</string>
+    <string name="del">Удалить</string>
+    <string name="large_text">
+        "Первый текст\n\n"
+        "Второй текст\n\n"
+        "Третий текст\n\n"
+        "Четвертый текст\n\n"
+        "Пятый текст\n\n"
+        "3D world.\n\n"
+    </string>
+</resources>
