@@ -56,4 +56,5 @@
         "Пятый текст\n\n"
         "3D world.\n\n"
     </string>
+    <string name="image_icon">image_icon</string>
 </resources>

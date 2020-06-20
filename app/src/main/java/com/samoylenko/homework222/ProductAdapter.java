@@ -36,7 +36,7 @@ public class ProductAdapter extends BaseAdapter {
         notifyDataSetChanged();
     }
 
-    void removeItem(int position) {
+    private void removeItem(int position) {
         products.remove(position);
         notifyDataSetChanged();
     }
@@ -96,7 +96,7 @@ public class ProductAdapter extends BaseAdapter {
         StringBuilder sb = new StringBuilder();
 
         for (int i = 0; i < products.size(); i++) {
-            sb.append(products.get(i).getTittle() + ";");
+            sb.append(products.get(i).getTittle()).append(";");
         }
         String value = sb.toString();
 
@@ -107,19 +107,10 @@ public class ProductAdapter extends BaseAdapter {
 
         String lineSeparator = System.getProperty("line.separator");
 
-        FileWriter writer = null;
-        try {
-            writer = new FileWriter(newFile, true);
-            writer.append(lineSeparator + value);
-            writer.close();
+        try (FileWriter writer = new FileWriter(newFile, true)) {
+            writer.append(lineSeparator).append(value);
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
-            try {
-                writer.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
         }
         //временный файл записан, значит можно его подменить
         if (oldFile.delete()) {

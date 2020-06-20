@@ -16,13 +16,12 @@ import android.widget.Toast;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
+import java.util.Objects;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -69,7 +68,7 @@ public class CustomActivity extends AppCompatActivity {
 
         //если есть переданные данные, добавляем
         if (arguments != null) {
-            String name = arguments.get("newStr").toString();
+            String name = Objects.requireNonNull(arguments.get("newStr")).toString();
             addData(name);
         }
     }
@@ -83,8 +82,6 @@ public class CustomActivity extends AppCompatActivity {
         if (stringToFile(newString)) {
             //Если все хорошо, можем пробовать читать
             arrayContent = getFromFile().split(";");
-
-            Map<String, String> m;
 
             for (String s : arrayContent) {
                 prodAdapter.addItem(new Product(
@@ -151,22 +148,13 @@ public class CustomActivity extends AppCompatActivity {
 
     //Добавление данных в файл
     public void addToFile(String value) {
-
         File logFile = new File(getApplicationContext().getExternalFilesDir(null), fileName);
         String lineSeparator = System.getProperty("line.separator");
-        FileWriter writer = null;
-        try {
-            writer = new FileWriter(logFile, true);
-            writer.append(lineSeparator + value + ";");
-            writer.close();
+
+        try (FileWriter writer = new FileWriter(logFile, true)) {
+            writer.append(lineSeparator).append(value).append(";");
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
-            try {
-                writer.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
         }
     }
 
@@ -180,21 +168,12 @@ public class CustomActivity extends AppCompatActivity {
             if (logFile.exists() && logFile.isFile()) {
                 return true;
             } else {
-                FileWriter writer = null;
-                try {
-                    writer = new FileWriter(logFile, true);
+                try (FileWriter writer = new FileWriter(logFile, true)) {
                     writer.append(string);
-                    writer.close();
                     return true;
                 } catch (IOException e) {
                     e.printStackTrace();
                     return false;
-                } finally {
-                    try {
-                        writer.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
                 }
             }
         } else {
@@ -204,8 +183,8 @@ public class CustomActivity extends AppCompatActivity {
 
     //функция чтения данных из файла
     public String getFromFile() {
-        FileReader fileReader = null;
-        String content = "";
+        //FileReader fileReader = null;
+        StringBuilder content = new StringBuilder();
         //проверяем, можем ли мы читать
         if (isExternalStorageReadable()) {
             File logFile = new File(getApplicationContext().getExternalFilesDir(null), fileName);
@@ -213,26 +192,16 @@ public class CustomActivity extends AppCompatActivity {
             //проверка существования файла
             if (logFile.exists() && logFile.isFile()) {
                 //если существует, то читаем его
-                try {
-                    fileReader = new FileReader(logFile);
+                try (FileReader fileReader = new FileReader(logFile)) {
                     Scanner scan = new Scanner(fileReader);
                     int i = 1;
                     while (scan.hasNextLine()) {
-                        content += scan.nextLine();
+                        content.append(scan.nextLine());
                         i++;
                     }
-                    fileReader.close();
-                    return content;
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
+                    return content.toString();
                 } catch (IOException e) {
                     e.printStackTrace();
-                } finally {
-                    try {
-                        fileReader.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
                 }
             } else {
                 Toast.makeText(CustomActivity.this, "Файла не существует!"
@@ -244,7 +213,7 @@ public class CustomActivity extends AppCompatActivity {
                     , Toast.LENGTH_LONG)
                     .show();
         }
-        return content;
+        return content.toString();
     }
 
     //генерация новых слов
